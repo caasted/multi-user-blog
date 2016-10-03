@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>New Post</title>
+  </head>
+  <style type="text/css">
+    body {
+      font-family: sans-serif;
+      width: 800px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+
+    .post-details {
+      margin: 0;
+    }
+
+    .post-content {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    hr {
+      margin: 20px auto;
+    }
+
+    label {
+      display: block;
+      font-size: 20px;
+    }
+
+    textarea {
+      width: 800px;
+      height: 4em;
+      font-size: 17px;
+      font-family: monospace;
+    }
+
+    .post-button {
+      font-size: 24px;
+    }
+
+    .error {
+      color: red;
+    }
+
+    .comment-author {
+      font-size: 12px;
+      font-weight: bold;
+      margin: 0;
+      margin-top: 20px;
+    }
+
+    .comment-body {
+      font-size: 17px;
+      margin: 0;
+    }
+  </style>
+  <body>
+    <h1>{{posts.subject}}</h1>
+    <p class="post-content">{{posts.content}}</p>
+    <hr>
+    <p class="post-details"><strong>Author:</strong> {{posts.author}}</p>
+    <p class="post-details"><strong>Posted:</strong> {{posts.created}}</p>
+    <p class="post-details"><strong>Likes:</strong> {{posts.likes}}</p>
+    <p class="post-details"><strong>Comments:</strong> {{posts.comments}}</p>
+    <p><a href="./">Return to blog main page</a></p>
+    <hr>
+    <h2>Comments:</h2>
+    {% for comment in comments %}
+      <div class="comment-author">
+        Posted by {{comment.author}} on {{comment.created}}
+      </div>
+      <div class="comment-body">
+        {{comment.content}}
+      </div>
+    {% endfor %}
+    <hr>
+    <form id="comment" method="post">
+      <label>
+        <div>Add a comment</div>
+        <textarea name="content">{{content}}</textarea>
+      </label>
+      <div class="error">{{error | safe}}</div>
+      <input class="post-button" type="submit" value="Post">
+    </form>
+  </body>
+</html>
