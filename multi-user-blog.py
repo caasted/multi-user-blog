@@ -198,9 +198,16 @@ class WelcomeHandler(Handler):
 
 class UserListHandler(Handler):
 	def get(self):
-		# TODO: Make only the admin able to view this page
-		reg_users = db.GqlQuery('select * from Users')
-		self.render('user_list.html', reg_users = reg_users)
+		cookie_data = self.request.cookies.get('username')
+		if cookie_data:
+			username = self.check_secure_val(cookie_data)
+		else:
+			username = None
+		if username == 'admin':
+			reg_users = db.GqlQuery('select * from Users')
+			self.render('user_list.html', reg_users = reg_users)
+		else:
+			self.redirect("/")
 
 class PostPage(Handler):
 	def render_post(self, content="", error=""):
@@ -213,7 +220,7 @@ class PostPage(Handler):
 		post_id = page_url.split('/')
 		if len(post_id) > 0:
 			posts = Posts.get_by_id(long(post_id[-1]), parent=None)
-			query = 'select * from Comments where post_id = :post_id order by created desc'
+			query = 'select * from Comments where post_id = :post_id'
 			comments = db.GqlQuery(query, post_id = long(post_id[-1]))
 			self.render("post.html", posts=posts, comments=comments, 
 				content=content, error=error, username=username)
