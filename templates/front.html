@@ -104,21 +104,22 @@
     <h1>Multi-User Blog</h1>
     {% if username %}
       <p><a href="./logout">Logout</a></p>
+      <form id="blog" method="post">
+        <label>
+          <div>Subject</div>
+          <input type="text" name="subject" value="{{subject}}">
+        </label>
+        <label>
+          <div>Content</div>
+          <textarea name="content">{{content}}</textarea>
+        </label>
+        <div class="error">{{error | safe}}</div>
+        <input class="post-button" type="submit" value="Post">
+      </form>
     {% else %}
       <p><a href="./signup">Register</a> / <a href="./login">Login</a></p>
     {% endif %}
-    <form id="blog" method="post">
-      <label>
-        <div>Subject</div>
-        <input type="text" name="subject" value="{{subject}}">
-      </label>
-      <label>
-        <div>Content</div>
-        <textarea name="content">{{content}}</textarea>
-      </label>
-      <div class="error">{{error | safe}}</div>
-      <input class="post-button" type="submit" value="Post">
-    </form>
+    
     <hr>
     {% for post in posts %}
       <!-- Outer Div -->
@@ -126,8 +127,8 @@
         <div class="post-top">
           <!-- Top Left Div -->
           <div class="post-subject">
-            <h3 class="post-subject">{{post.subject}}</h3>
-            <p class="post-info"><a href="/{{post.key().id()}}">Posted by {{post.author}} on {{post.created}}</a></p>
+            <h3 class="post-subject"><a href="/{{post.key().id()}}">{{post.subject}}</a></h3>
+            <p class="post-info">Posted by {{post.author}} on {{post.created}}</p>
             <p class="post-info">Likes: {{post.likes}}, Comments: {{post.comments}}</p>
           </div>
           <!-- Top Right Div -->

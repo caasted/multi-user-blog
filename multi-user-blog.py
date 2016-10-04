@@ -314,6 +314,9 @@ class EditCommentHandler(Handler):
 		comment_id = self.request.get("comment_id")
 		if delete_request:
 			post = Comments.get_by_id(long(comment_id), parent=None)
+			blog = Posts.get_by_id(post.post_id, parent=None)
+			blog.comments -= 1
+			blog.put()
 			db.delete(post)
 			time.sleep(1) # delay so page doesn't load before db updates
 			self.redirect("/" + str(post.post_id))
