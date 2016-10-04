@@ -1,1 +1,11 @@
 # multi-user-blog
+
+This application has been written for Google App Engine. A working instance can be found at https://multi-user-blog-145122.appspot.com/
+
+To run a local instance of your own, install the Google Cloud SDK and then use a terminal window to navigate into the multi-user-blog directory. Then you will be able to launch a local instance of the application using ```dev_appserver.py app.yaml```
+
+## Files
+
+```app.yaml``` tells the app engine what language is being used, where to locate the handlers, and what libraries are used.
+```multi-user-blog.py``` contains all of the backend routines.
+```/templates``` contains the HTML structures that jinga2 uses to generate the application's webpages.
