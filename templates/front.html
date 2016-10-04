@@ -66,7 +66,6 @@
       width: 100px;
       min-height: 2.5em;
       margin-left: 700px;
-      padding-top: 1em;
       text-align: right;
     }
 
@@ -103,7 +102,11 @@
   </style>
   <body>
     <h1>Multi-User Blog</h1>
-    <p><a href="./login">Login</a> / <a href="./logout">Logout</a></p>
+    {% if username %}
+      <p><a href="./logout">Logout</a></p>
+    {% else %}
+      <p><a href="./signup">Register</a> / <a href="./login">Login</a></p>
+    {% endif %}
     <form id="blog" method="post">
       <label>
         <div>Subject</div>
@@ -129,9 +132,18 @@
           </div>
           <!-- Top Right Div -->
           <div class="post-liking">
-            <form id="like" method="post">
+            <form method="post">
               <input type="hidden" name="blog" value="{{post.key().id()}}">
+              <input type="hidden" name="like" value="True">
               <input class="vote-button" type="submit" value="Like">
+            </form>
+          </div>
+        </div>
+        <div class="post-liking">
+            <form method="post">
+              <input type="hidden" name="blog" value="{{post.key().id()}}">
+              <input type="hidden" name="unlike" value="True">
+              <input class="vote-button" type="submit" value="Unlike">
             </form>
           </div>
         </div>

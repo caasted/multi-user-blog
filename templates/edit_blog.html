@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog Editor</title>
+  </head>
+  <style type="text/css">
+    body {
+      font-family: sans-serif;
+      width: 800px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+
+    .error {
+      color: red;
+    }
+
+    label {
+      display: block;
+      font-size: 20px;
+    }
+
+    input[type=text] {
+      width: 790px;
+      font-size: 20px;
+      padding: 2px;
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 800px;
+      height: 200px;
+      font-size: 17px;
+      font-family: monospace;
+    }
+
+    .post-button {
+      font-size: 24px;
+    }
+  </style>
+  <body>
+    <h1>Blog Editor</h1>
+    <form method="post">
+      <input type="hidden" name="blog" value="{{blog}}">
+      <label>
+        <div>Subject</div>
+        <input type="text" name="subject" value="{{post.subject}}">
+      </label>
+      <label>
+        <div>Content</div>
+        <textarea name="content">{{post.content}}</textarea>
+      </label>
+      <div class="error">{{error | safe}}</div>
+      <input class="post-button" type="submit" value="Update">
+    </form>
+    <form method="post">
+      <input type="hidden" name="delete" value="True">
+      <input class="post-button" type="submit" value="Delete">
+    </form>
+  </body>
+</html>
