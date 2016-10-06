@@ -30,11 +30,11 @@ class PostPageHandler(handler.Handler):
 			comment = comments.Comments(post_id=long(post), content=content, 
 								author=username)
 			comment.put()
+			time.sleep(1) # delay so count includes new post
+			query = 'select * from Comments where post_id = :post_id'
+			comment_count = db.GqlQuery(query, post_id = long(post)).count()
 			entry = posts.Posts.get_by_id(long(post), parent=None)
-			if entry.comments:
-				entry.comments += 1
-			else:
-				entry.comments = 1
+			entry.comments = comment_count
 			entry.put()
 			time.sleep(1) # delay so page doesn't load before db updates
 			self.render_post(post=post)

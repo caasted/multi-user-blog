@@ -14,22 +14,26 @@ class LikeHandler():
 				break
 		if blog_entry.author != username and not already_liked:
 			if self.request.get("like"):
-				new_likes = blog_entry.likes + 1
-				blog_entry.likes = new_likes
-				blog_entry.put()
 				new_like = likes.Likes(post_id=long(blog), username=username)
 				new_like.put()
+				time.sleep(1) # delay so count includes new like
+				query = 'select * from Likes where post_id = :post_id'
+				like_count = db.GqlQuery(query, post_id = long(blog)).count()
+				blog_entry.likes = like_count
+				blog_entry.put()
 				return ""
 			else:
 				return "You have already unliked this post (or didn't like it before)"
 		elif blog_entry.author != username and already_liked:
 			if self.request.get("unlike"):
-				new_likes = blog_entry.likes - 1
-				blog_entry.likes = new_likes
-				blog_entry.put()
 				query = "select * from Likes where post_id = :blog and username = :username"
 				remove_like = db.GqlQuery(query, blog=long(blog), username=username)
 				db.delete(remove_like)
+				time.sleep(1) # delay so count includes new like
+				query = 'select * from Likes where post_id = :post_id'
+				like_count = db.GqlQuery(query, post_id = long(blog)).count()
+				blog_entry.likes = like_count
+				blog_entry.put()
 				return ""
 			else:
 				return "You have already liked this post"

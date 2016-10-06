@@ -25,10 +25,13 @@ class EditCommentHandler(handler.Handler):
 		comment = comments.Comments.get_by_id(long(post), parent=None)
 		if username == comment.author:
 			if delete_request:
-				blog = posts.Posts.get_by_id(comment.post_id, parent=None)
-				blog.comments -= 1
-				blog.put()
 				db.delete(comment)
+				time.sleep(1) # delay so count includes new post
+				query = 'select * from Comments where post_id = :post_id'
+				comment_count = db.GqlQuery(query, post_id = long(post)).count()
+				blog = posts.Posts.get_by_id(comment.post_id, parent=None)
+				blog.comments = comment_count
+				blog.put()
 				time.sleep(1) # delay so page doesn't load before db updates
 				self.redirect("/post/" + str(blog.key().id()))
 			else:		
