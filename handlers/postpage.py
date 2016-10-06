@@ -30,7 +30,7 @@ class PostPageHandler(handler.Handler):
 			comment = comments.Comments(post_id=long(post), content=content, 
 								author=username)
 			comment.put()
-			entry = posts.Posts.get_by_id(long(post_id[-1]), parent=None)
+			entry = posts.Posts.get_by_id(long(post), parent=None)
 			if entry.comments:
 				entry.comments += 1
 			else:
