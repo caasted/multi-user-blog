@@ -30,12 +30,12 @@ class PostPageHandler(handler.Handler):
 			comment = comments.Comments(post_id=long(post), content=content, 
 								author=username)
 			comment.put()
-			post = posts.Posts.get_by_id(long(post_id[-1]), parent=None)
-			if post.comments:
-				post.comments += 1
+			entry = posts.Posts.get_by_id(long(post_id[-1]), parent=None)
+			if entry.comments:
+				entry.comments += 1
 			else:
-				post.comments = 1
-			post.put()
+				entry.comments = 1
+			entry.put()
 			time.sleep(1) # delay so page doesn't load before db updates
 			self.render_post(post=post)
 		elif username:
