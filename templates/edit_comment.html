@@ -1,50 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Comment Editor</title>
-  </head>
-  <style type="text/css">
-    body {
-      font-family: sans-serif;
-      width: 800px;
-      margin: 0 auto;
-      padding: 10px;
-    }
-
-    .error {
-      color: red;
-    }
-
-    label {
-      display: block;
-      font-size: 20px;
-    }
-
-    textarea {
-      width: 800px;
-      height: 200px;
-      font-size: 17px;
-      font-family: monospace;
-    }
-
-    .post-button {
-      font-size: 24px;
-    }
-  </style>
-  <body>
-    <h1>Comment Editor</h1>
-    <form method="post">
-      <input type="hidden" name="comment_id" value="{{comment_id}}">
-      <label>
-        <textarea name="content">{{comment.content}}</textarea>
-      </label>
-      <div class="error">{{error | safe}}</div>
-      <input class="post-button" type="submit" value="Update">
-    </form>
-    <form method="post">
-      <input type="hidden" name="delete" value="True">
-      <input class="post-button" type="submit" value="Delete">
-    </form>
-    <p><a href="/{{comment.post_id}}">Return to blog post</a></p>
-  </body>
-</html>
+{% extends "base.html" %}
+{% block page_content %}
+  <h2>Comment Editor</h2>
+  <form method="post">
+    <input type="hidden" name="comment_id" value="{{comment_id}}">
+    <label>
+      <textarea name="content">{{comment.content}}</textarea>
+    </label>
+    <div class="error">{{error | safe}}</div>
+    <input class="post-button" type="submit" value="Update">
+  </form>
+  <form method="post">
+    <input type="hidden" name="delete" value="True">
+    <input class="post-button" type="submit" value="Delete">
+  </form>
+  <p><a href="/post/{{comment.post_id}}">Return to blog post</a></p>
+{% endblock %}

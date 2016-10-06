@@ -11,38 +11,35 @@ from models import *
 from . import handler
 
 class EditBlogHandler(handler.Handler):
-	def get(self):
-		blog = self.request.get("blog")
-		post = posts.Posts.get_by_id(long(blog), parent=None)
+	def get(self, post):
+		entry = posts.Posts.get_by_id(long(post), parent=None)
 		username = self.check_cookie()
-		if username == post.author:
-			self.render("edit_blog.html", post=post, blog=blog)
+		if username == entry.author:
+			self.render("edit_blog.html", post=entry, blog=post)
 		else:
 			self.redirect("/login")
 
-	def post(self):
+	def post(self, post):
 		delete_request = self.request.get("delete")
-		blog = self.request.get("blog")
 		username = self.check_cookie()
-		post = posts.Posts.get_by_id(long(blog), parent=None)
-		if username == post.author:
+		entry = posts.Posts.get_by_id(long(post), parent=None)
+		if username == entry.author:
 			if delete_request:
-				db.delete(post)
+				db.delete(entry)
 				time.sleep(1) # delay so page doesn't load before db updates
 				self.redirect("/")
 			else:
 				subject = self.request.get("subject")
 				content = self.request.get("content")
 				if subject and content:
-					post = posts.Posts.get_by_id(long(blog), parent=None)
-					post.subject = subject
-					post.content = content
-					post.put()
+					entry.subject = subject
+					entry.content = content
+					entry.put()
 					time.sleep(2) # delay so page doesn't load before db updates
-					self.redirect("/" + str(blog))
+					self.redirect("/post/%s" % post)
 				else:
 					error = "Needs both a subject and content! Use the delete button to remove both."
-					self.redirect("/edit_blog?blog=%s" % blog)
+					self.redirect("/edit_blog/%s" % post)
 		else:
 			self.redirect("/login")
 

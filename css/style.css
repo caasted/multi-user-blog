@@ -1,0 +1,133 @@
+body {
+  font-family: sans-serif;
+  width: 800px;
+  margin: 0 auto;
+  padding: 10px;
+  background: lightblue;
+}
+
+h1 {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+label {
+  display: block;
+  font-size: 20px;
+}
+
+input[type=text] {
+  width: 600px;
+  font-size: 20px;
+  padding: 2px;
+  font-weight: bold;
+}
+
+textarea {
+  width: 790px;
+  height: 200px;
+  font-size: 17px;
+  font-family: monospace;
+}
+
+hr {
+  margin: 20px auto;
+}
+
+tr {
+  font-weight: bold
+}
+
+.header {
+  width: 800px;
+}
+
+.content {
+  width: 800px;
+}
+
+.error {
+  color: red;
+}
+
+.post-button {
+  font-size: 24px;
+}
+
+.post-section {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.post-top {
+  width: 100%;
+}
+
+.post-subject {
+  width: 700px;
+  float: left;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0;
+}
+
+.post-liking {
+  width: 100px;
+  min-height: 2.5em;
+  margin-left: 700px;
+  text-align: right;
+}
+
+.post-body {
+  width: 100%;
+  padding: 2px;
+}
+
+.post-content {
+  width: 100%;
+  font-size: 17px;
+  margin: 0;
+}
+
+.post-info {
+  font-size: 12px;
+  font-weight: bold;
+  width: calc(680px);
+  margin: 0;
+  margin-left: 20px;
+}
+
+.vote-button {
+  height: 30px;
+  width: 60px;
+  margin: 0;
+  padding: 0;
+  font-size: 17px;
+}
+
+.post-permalink {
+  font-size: 12px;
+}
+
+.post-details {
+  margin: 0;
+}
+
+.comment-author {
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0;
+  margin-top: 20px;
+}
+
+.comment-body {
+  font-size: 17px;
+  margin: 0;
+}
+
+.password {
+  width: 600px;
+}
