@@ -28,7 +28,7 @@ class EditCommentHandler(handler.Handler):
 				db.delete(comment)
 				time.sleep(1) # delay so count includes new post
 				query = 'select * from Comments where post_id = :post_id'
-				comment_count = db.GqlQuery(query, post_id = long(post)).count()
+				comment_count = db.GqlQuery(query, post_id = long(comment.post_id)).count()
 				blog = posts.Posts.get_by_id(comment.post_id, parent=None)
 				blog.comments = comment_count
 				blog.put()
