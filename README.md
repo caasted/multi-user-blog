@@ -19,3 +19,7 @@ To run a local instance of your own, install the [Google Cloud SDK](https://clou
 `/templates` contains the HTML structures that jinga2 uses to generate the application's webpages.
 
 `/css` contains the stylesheet used for the site
+
+## License
+
+**multi-user-blog** is free software, and may be redistributed under the terms specified in the [LICENSE](https://github.com/caasted/multi-user-blog/blob/master/LICENSE) file.
