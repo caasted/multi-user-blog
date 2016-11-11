@@ -1,6 +1,6 @@
 # multi-user-blog
 
-This application has been developed as part of Udacity's Full Stack Web Developer Nanodegree. It uses Google App Engine to serve a web application that allows multiple users to make, edit, and delete blog entries as well as add, edit, and delete comments on the blog entries. A working instance can be found at https://multi-user-blog-145122.appspot.com/
+This application has been developed as part of Udacity's Full Stack Web Developer Nanodegree. It uses Google App Engine to serve a web application that allows multiple users to make, edit, and delete blog entries as well as add, edit, and delete comments on the blog entries.
 
 ## Quickstart
 
